@@ -13,7 +13,9 @@ class Bug {
   PVector acceleration;
   float maxforce;    // Maximum steering force
   float maxspeed;    // Maximum speed
-  PImage bug;
+  PImage bug1;
+  PImage bug2;
+  PImage bug3;
   boolean parate = false;
   float r;
   PVector ruido = new PVector(random(-0.1, 0.1), random(-0.1, 0.1));
@@ -24,7 +26,9 @@ class Bug {
     position = new PVector(x, y);
     maxspeed = 1;
     maxforce = 0.5;
-    bug = loadImage("bug2.gif");
+    bug1 = loadImage("bug1.png");
+    bug2 = loadImage("bug2.png");
+    bug3 = loadImage("bug3.png");
     r = random(360);
   }
 
@@ -95,7 +99,7 @@ class Bug {
       rotate(theta);
     }
     imageMode(CENTER);
-    image(bug, 0, 0, 25, 25);
+    image(bug1, 0, 0, 50, 50);
     popMatrix();
   }
 
@@ -113,7 +117,7 @@ class Bug {
       rotate(theta);
     }
     imageMode(CENTER);
-    image(bug, 0, 0, 25, 25);
+    image(bug2, 0, 0, 50, 50);
     popMatrix();
   }
 
@@ -131,7 +135,7 @@ class Bug {
       rotate(theta);
     }
     imageMode(CENTER);
-    image(bug, 0, 0, 25, 25);
+    image(bug3, 0, 0, 50, 50);
     popMatrix();
   }
   

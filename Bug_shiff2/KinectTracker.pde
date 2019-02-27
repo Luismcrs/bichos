@@ -18,10 +18,10 @@ class KinectTracker {
 
   // Depth data
   int[] depth;
-  
+
   // What we'll show the user
   PImage display;
-   
+
   KinectTracker() {
     // This is an awkard use of a global variable here
     // But doing it this way for simplicity
@@ -37,7 +37,6 @@ class KinectTracker {
   void track() {
     // Get the raw depth as array of integers
     depth = kinect.getRawDepth();
-
     // Being overly cautious here
     if (depth == null) return;
 
@@ -47,7 +46,7 @@ class KinectTracker {
 
     for (int x = 0; x < kinect.width; x++) {
       for (int y = 0; y < kinect.height; y++) {
-        
+
         int offset =  x + y*kinect.width;
         // Grabbing the raw depth
         int rawDepth = depth[offset];

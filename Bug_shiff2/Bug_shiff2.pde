@@ -7,7 +7,9 @@ import org.openkinect.processing.*;
 KinectTracker tracker;
 Kinect kinect;
 
-SoundFile soundfile;
+SoundFile soundfile1;
+SoundFile soundfile2;
+SoundFile soundfile3;
 
 int cual;
 int cual_sonido;
@@ -16,31 +18,33 @@ int cuantas = 100;
 Bug[] b = new Bug[cuantas];
 
 void setup() {
-  size(640, 360);
+  //size(640, 360);
+
+  size(1920, 1080, P2D);
   for (int i = 0; i<cuantas; i++) {
     b[i] = new Bug(random(width), random(height));
   }
 
   kinect = new Kinect(this);
   tracker = new KinectTracker();
-
+  soundfile3 = new SoundFile(this, "data/InsectosNivel3.wav");
+  soundfile2 = new SoundFile(this, "data/InsectosNivel2.wav");
+  soundfile1 = new SoundFile(this, "data/InsectosNivel1.wav");
   switch (cual_sonido) {
   case 0:
-    soundfile = new SoundFile(this, "data/InsectosNivel1.wav");
+    soundfile1.loop();
 
   case 1:
-    soundfile = new SoundFile(this, "data/InsectosNivel2.wav");
+    soundfile2.loop();
 
   case 2:
-    soundfile = new SoundFile(this, "data/InsectosNivel3.wav");
+    soundfile3.loop();
   }
-
-  soundfile.loop();
 }
 
 void draw() {
   background(0);
- 
+
   tracker.track();
   tracker.display();
   PVector v1 = tracker.getPos();
@@ -52,7 +56,7 @@ void draw() {
   PVector nervios;
 
   nervios= pmouse.sub(mouse);
- 
+
 
   // Draw an ellipse at the mouse position
   fill(200);
@@ -81,14 +85,16 @@ void draw() {
     }
   }
 
-  float amplitude = map(constrain(nervios.mag(), 0, 5), 0, 5, 1.0, 0.0);
-  soundfile.amp(amplitude);
+  float amplitude = map(constrain(nervios.mag(), 0, 5), 0, 5, 1.0, 0.1);
+  soundfile1.amp(amplitude);
+  soundfile2.amp(amplitude);
+  soundfile3.amp(amplitude);
 }
 
 void keyPressed() {
   if (key == 'a') {
     cual++;
-    if (cual ==3) {
+    if (cual ==4) {
       cual=0;
     }
   }
